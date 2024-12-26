@@ -32,6 +32,12 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: app
+          path: /home/ubuntu/app
+          
       - name: Connecting EC2 through SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
