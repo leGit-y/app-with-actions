@@ -18,6 +18,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+    - name: Set application.properties
+      run: |
+        cd ./src/main/resources
+        touch ./application.properties
+        echo "${{secrets.APPLICATION_PROPERTIES}}" >> ./application.properties
         
     - name: Build with Maven
       run: mvn -B package --file pom.xml
@@ -71,7 +77,6 @@ jobs:
     needs: ci
     runs-on: ubuntu-latest
     steps:
-      
             
       - name: Execute deployment script
         uses: appleboy/ssh-action@v1.2.0
