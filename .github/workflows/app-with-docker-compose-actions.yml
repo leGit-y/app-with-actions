@@ -25,11 +25,11 @@ jobs:
     - name: Naming jar file
       run: mv ./target/*.jar ./target/app.jar
 
-    - name: Move jar file to Backend Folder
-      run: mv ./target/app.jar backend/app.jar
-
     - name: Check jar file
       run: ls ./target
+
+    - name: Move jar file to Backend Folder
+      run: mv ./target/app.jar backend/app.jar
 
     - uses: actions/upload-artifact@v4
       with:
