@@ -1,7 +1,7 @@
 name: App With Github Actions with Docker-Compose CI/CD
 
 on:
-  workflow_dispatch
+  push
 
 jobs:
   ci:
@@ -88,8 +88,4 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/mysql-server
-            sudo docker stop $(sudo docker ps -qa)
-            sudo docker rm $(sudo docker ps -qa)
             sudo docker-compose up
