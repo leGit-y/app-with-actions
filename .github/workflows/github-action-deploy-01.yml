@@ -1,5 +1,5 @@
 name: deploy workflow
-on: workflow_dispatch
+on: push
 
 jobs:
   build:
@@ -14,6 +14,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
@@ -23,9 +24,10 @@ jobs:
     - name: Check jar file
       run: ls ./target
 
-    - uses: actions/upload-artifact@v4
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
       with:
-        name: app.jar
+        name: app
         path: ./target/*.jar
 
         
@@ -34,15 +36,18 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-      - uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app
+
       - name: From Github Actions to AWS EC2 through SCP
         uses: appleboy/scp-action@v0.1.7
         with: 
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
-          source: .
+          source: app.jar
           target: /home/ubuntu/app
           
       - name: Connecting EC2 through SSH
