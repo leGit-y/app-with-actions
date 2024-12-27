@@ -18,12 +18,15 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Check directory structure
+      run: ls
 
     - name: Set application.properties
       run: |
         cd ./src/main/resources
         touch ./application.properties
         echo "${{secrets.APPLICATION_PROPERTIES}}" >> ./application.properties
+      shell: bash
         
     - name: Build with Maven
       run: mvn -B package --file pom.xml
