@@ -1,7 +1,7 @@
 services:
   db:
     container_name: mysql-server
-    image: enniley/mysql-server:latest
+    image: ${{ secrets.DOCKERHUB_USERNAME }}/mysql-server:latest
     ports:
       - 3306:3306
     volumes:
@@ -21,7 +21,7 @@ services:
 
   backend:
     container_name: backend-server
-    image: enniley/app-with-actions:latest
+    image: ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions:latest
     ports:
       - 8080:8080
     environment:
