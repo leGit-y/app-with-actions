@@ -62,7 +62,7 @@ jobs:
           sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
           sudo docker stop $(sudo docker ps -qa)
           sudo docker rm $(sudo docker ps -qa)
-          sudo docker run --name mysql-server \
+          sudo docker run --name backend-server \
           -d -p 8080:8080 \
           -e TZ=Asia/Seoul \
           ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
