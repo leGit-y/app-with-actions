@@ -3,19 +3,31 @@ package actions.dto;
 import actions.entity.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
-@AllArgsConstructor
+
 @ToString
 @Getter
 public class StudentDTO {
 
     private String name;
 
+    protected StudentDTO(){}
+
+    private StudentDTO(String name){
+        this.name = name;
+    }
+
+    public static StudentDTO of(String name){
+        return new StudentDTO(name);
+    }
     public static StudentDTO from (Student student){
-        return new StudentDTO(
-                student.getName()
-        );
+        return StudentDTO.of(student.getName());
+    }
+
+    public static Student toEntity (StudentDTO studentDTO){
+        return Student.of(studentDTO.getName());
     }
 
 }
