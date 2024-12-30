@@ -25,7 +25,7 @@ jobs:
       run: |
         cd ./src/main/resources
         touch ./application.properties
-        echo "${{secrets.APPLICATION_PROPERTIES}}" >> ./application.properties
+        echo "${{ secrets.APPLICATION_PROPERTIES }}" >> ./application.properties
       shell: bash
         
     - name: Build with Maven
@@ -80,6 +80,14 @@ jobs:
     needs: ci
     runs-on: ubuntu-latest
     steps:
+      - name: Set .env file
+        run: |
+          cd
+          touch .env
+          echo "DB_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mysql-server" >> .env
+          echo "BACKEND_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions" >> .env
+        shell: bash
+      
             
       - name: Execute deployment script
         uses: appleboy/ssh-action@v1.2.0
