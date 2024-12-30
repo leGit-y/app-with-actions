@@ -86,8 +86,6 @@ jobs:
           touch .env
           echo "DB_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/mysql-server" >> .env
           echo "BACKEND_IMAGE=${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions" >> .env
-        shell: bash
-      
             
       - name: Execute deployment script
         uses: appleboy/ssh-action@v1.2.0
