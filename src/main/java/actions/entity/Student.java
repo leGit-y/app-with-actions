@@ -1,6 +1,8 @@
 package actions.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.ToString;
@@ -10,15 +12,19 @@ import lombok.ToString;
 @Entity
 public class Student {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
     protected Student(){}
 
-    private Student(int id, String name) {
-        this.id = id;
+    private Student(String name) {
         this.name = name;
+    }
+
+    public static Student of(String name){
+        return new Student(name);
     }
 
 

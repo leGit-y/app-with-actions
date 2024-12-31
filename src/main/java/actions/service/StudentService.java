@@ -24,4 +24,11 @@ public class StudentService {
     }
 
 
+    @Transactional
+    public StudentDTO postStudent(StudentDTO studentDTO) {
+        Student student = studentRepository.save(StudentDTO.toEntity(studentDTO));
+        System.out.println(student);
+        return StudentDTO.from(student);
+
+    }
 }
