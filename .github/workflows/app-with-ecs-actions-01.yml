@@ -5,7 +5,7 @@ on:
       - main
 env:
   AWS_REGION: ap-northeast-2
-  ECR_REPOSITORY: first-private-ecs
+  ECR_REPOSITORY: first-private-ecr
   ECS_SERVICE: first-ecs-service-01
   ECS_CLUSTER: FirstECSCluster01
   CONTAINER_NAME: first-ecs-container-01
