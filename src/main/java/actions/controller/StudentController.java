@@ -9,13 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @RequestMapping("/api/students")
 @RestController
 public class StudentController {
     private final StudentService studentService;
 
-    @ResponseBody
     @GetMapping
     public List<StudentDTO> getStudents(){
 
@@ -24,7 +22,6 @@ public class StudentController {
         return students;
     }
 
-    @ResponseBody
     @PostMapping
     public StudentDTO postStudent(@RequestBody StudentDTO studentDTO){
 
