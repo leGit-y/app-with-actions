@@ -72,4 +72,5 @@ jobs:
           sudo docker run --name backend-server \
           -d -p 8080:8080 \
           -e TZ=Asia/Seoul \
-          ${{ secrets.DOCKERHUB_USERNAME }}/app-with-actions
+          ${{ secrets.DOCKERHUB_USERNAME }}/app-with-rds-actions
+          sudo docker image prune -a -f
